@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carson</title>
+    <script>
+         var i = 0;
+         function jsCallAndroidShare(){
+            alert("android调用了js中的callJS方法");
+            hdShopSdk.share("需要分享的内容");
+         }
+
+         function jsCallAndroidLogin(){
+            hdShopSdk.login("window.loginSuccessCallback");
+         }
+
+         window.loginSuccessCallback = function(msg) {
+            setTimeout(function() {
+                alert(msg);
+            }, 1000);
+         }
+
+         function androidCallJs(){
+            alert("android调用了js中的callJS方法");
+         }
+
+         function openUploadFileDlg() {
+           hdShopSdk.openUploadFileDlg("window.getSelImgPath")
+         }
+
+        function openCamera() {
+            hdShopSdk.h5OpenCamera("window.cameraCallback")
+        }
+
+        function getSelImgPath(path) {
+            var img;
+            if(i == 0) {
+                img = document.getElementById("img0");
+            } else if(i == 1) {
+                img=document.getElementById("img1");
+            } else if(i == 2) {
+                img=document.getElementById("img2");
+            } else if(i == 3) {
+                img=document.getElementById("img3");
+            } else if(i == 4) {
+                img=document.getElementById("img4");
+            } else if(i == 5) {
+                img=document.getElementById("img5");
+            }
+
+            i++;
+            if(i == 5) {
+                i = 0;
+            }
+            img.src=path;
+        }
+
+    </script>
+</head>
+<body>
+<button type="button" id="button1" onclick="jsCallAndroidShare()">js调用Android的share方法</button>
+<button type="button" id="button2" onclick="jsCallAndroidLogin()">js调用Android的Login方法</button>
+<div>选择图片:
+    <button onclick="openUploadFileDlg()">点击选择图片</button>
+</div>
+<div id="imgDiv"></div>
+<img id="img0" alt="图片1" height="100" width="60"/>
+<img id="img1" alt="图片2" height="100" width="60"/>
+<img id="img2" alt="图片3" height="100" width="60"/>
+<img id="img3" alt="图片4" height="100" width="60"/>
+<img id="img4" alt="图片5" height="100" width="60"/>
+</body>
+</html>
